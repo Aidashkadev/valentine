@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жануське</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .envelope {
+            margin-bottom: 20px;
+        }
+
+        .envelope img {
+            width: 300px; /* Увеличиваем размер изображения */
+            cursor: pointer;
+        }
+
+        #secondImage {
+            display: none;
+            width: 400px; /* Увеличиваем второе изображение */
+            margin-top: 20px;
+        }
+
+        .response-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center; /* Центрируем кнопки */
+            gap: 20px; /* Расстояние между кнопками */
+        }
+
+        .response-buttons button {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px; /* Скругляем углы кнопок */
+            cursor: pointer;
+            background: #fff;
+            color: #f44336;
+            transition: transform 0.3s, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+        }
+
+        /* Стили для кнопки Yes */
+        .response-buttons .yes {
+            background: #4caf50;
+            color: white;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Стили для кнопки No */
+        .response-buttons .no {
+            background: #f44336;
+            color: white;
+        }
+
+        /* Эффект при наведении на кнопку Yes */
+        .response-buttons .yes:hover {
+            transform: scale(1.1); /* Увеличиваем кнопку при наведении */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Тень */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="envelope">
+        <img id="mainImage" src="../image/memi-klev-club-k6el-p-memi-kot-s-rozoi-1.jpg" alt="Envelope">
+        <h1 id="mainText">Будешь моей Жанымкой? 💌</h1>
+    </div>
+    <img id="secondImage" src="../image/image.png" alt="Second Image">
+    <div class="response-buttons">
+        <button class="yes">Да</button>
+        <button class="no">Нет</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const noButton = document.querySelector(".no");
+            const yesButton = document.querySelector(".yes");
+            const mainImage = document.getElementById("mainImage");
+            const secondImage = document.getElementById("secondImage");
+            const mainText = document.getElementById("mainText");
+
+            // Замена изображения и текста при нажатии "Yes"
+            yesButton.addEventListener("click", () => {
+                mainImage.style.display = "none"; // Скрыть первое изображение
+                secondImage.style.display = "block"; // Показать второе изображение
+                mainText.textContent = "Есс! Люблю тебяя Жаным ❤️";
+            });
+
+            // Смена текста на красной кнопке "No" при каждом нажатии
+            const noButtonTexts = [
+                "Чтооо?😔",
+                "Ты уверен?💔",
+                "Не разбивай мое сердце.....",
+                "Прошууууу!!!!! 😓" ,
+                "Подумай хорошенько",
+                "Нееет!!!"
+            ];
+            let noButtonIndex = 0;
+
+            noButton.addEventListener("click", () => {
+                noButton.textContent = noButtonTexts[noButtonIndex];
+                noButtonIndex = (noButtonIndex + 1) % noButtonTexts.length; // Переключаем текст при каждом нажатии
+
+                // Увеличиваем кнопку "Yes"
+                let currentScale = parseFloat(yesButton.style.transform.replace('scale(', '').replace(')', '') || 1);
+                currentScale += 0.1;  // Увеличиваем на 0.1 при каждом клике
+                yesButton.style.transform = `scale(${currentScale})`;  // Применяем новый размер
+            });
+        });
+    </script>
+</body>
+</html>
